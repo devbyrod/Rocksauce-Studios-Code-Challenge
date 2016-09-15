@@ -20,8 +20,8 @@
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imgAuthor"
-                android:layout_height="60dp"
-                android:layout_width="60dp"
+                android:layout_height="@dimen/user_image_size"
+                android:layout_width="@dimen/user_image_size"
                 app:riv_oval="true"
                 android:src="@drawable/profile_avatar"
                 android:padding="2dp"
@@ -95,7 +95,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#dcdcdc" />
+        android:layout_height="@dimen/separator_line_height"
+        android:background="@color/colorGray" />
 
 </LinearLayout>

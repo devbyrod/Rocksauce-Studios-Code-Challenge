@@ -1,10 +1,13 @@
 package com.rocksaucestudios.rodrigoesquivel_androidcodechallenge.adapters;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +22,10 @@ import java.util.List;
  */
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
 
+    private static int SCREEN_WIDTH_SLICE_TO_USE = 3;
+    private static int POST_ANIMATION_DURATION = 800;
+    private static float POST_INITIAL_ALPHA = .3f;
+
     public interface PostsAdapterListener{
 
         void onItemClick(Post post);
@@ -27,6 +34,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     Context mContext;
     PostsAdapterListener mListener;
     List<Post> mPosts;
+    int mDistanceToMovePostX = 0;
 
     public PostsAdapter(List<Post> posts, PostsAdapterListener listener) {
 
@@ -50,11 +58,16 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
         mContext = parent.getContext();
 
+        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+
+        mDistanceToMovePostX = display.getWidth() / SCREEN_WIDTH_SLICE_TO_USE;
+
         return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_post_list, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
 
         if(mPosts == null || mPosts.isEmpty())
             return;
@@ -82,11 +95,26 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             }
         });
 
+        manageAnimation(holder.view);
+
     }
 
     @Override
     public int getItemCount() {
         return mPosts == null ? 0 : mPosts.size();
+    }
+
+    private void manageAnimation(View view) {
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1) {
+
+            view.setAlpha(POST_INITIAL_ALPHA);
+            view.setX(mDistanceToMovePostX);
+            view.animate()
+                    .setDuration(POST_ANIMATION_DURATION)
+                    .alpha(1)
+                    .translationX(0);
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -98,6 +126,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         final TextView txtComments;
         final TextView txtUps;
         final TextView txtDowns;
+        boolean finishedAnimation;
 
         public ViewHolder(View itemView) {
 
@@ -109,6 +138,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             txtComments = (TextView) itemView.findViewById(R.id.txtComments);
             txtDowns = (TextView) itemView.findViewById(R.id.txtDowns);
             txtUps = (TextView) itemView.findViewById(R.id.txtUps);
+            finishedAnimation = false;
         }
     }
 }

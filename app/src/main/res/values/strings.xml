@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">RodrigoEsquivel_AndroidCodeChallenge</string>
+    <string name="email">Email</string>
+    <string name="sms">Sms</string>
+    <string name="cancel">Cancel</string>
+    <string name="search">Search</string>
+    <string name="default_search_term">funny</string>
 </resources>

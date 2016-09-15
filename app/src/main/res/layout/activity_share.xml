@@ -28,14 +28,14 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/user_image_size"
+                    android:layout_height="@dimen/user_image_size"
                     android:src="@drawable/ic_action_email"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mail"/>
+                    android:text="@string/email"/>
 
             </LinearLayout>
 
@@ -43,8 +43,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#dcdcdc" />
+            android:layout_height="@dimen/separator_line_height"
+            android:background="@color/colorGray" />
 
         <LinearLayout
             android:id="@+id/btnSms"
@@ -61,14 +61,15 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/user_image_size"
+                    android:layout_height="@dimen/user_image_size"
                     android:src="@drawable/ic_action_send_now"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SMS"/>
+                    android:text="@string/sms"
+                    android:textAllCaps="true"/>
 
             </LinearLayout>
         </LinearLayout>
@@ -80,7 +81,7 @@
             android:background="@null"
             android:textSize="@dimen/font_size_large"
             android:textColor="@color/colorPrimary"
-            android:text="Cancel"/>
+            android:text="@string/cancel"/>
 
     </LinearLayout>
 

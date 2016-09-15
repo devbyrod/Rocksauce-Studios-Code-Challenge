@@ -37,7 +37,7 @@
             android:background="@drawable/image_rounded_corners"
             android:backgroundTint="@android:color/white"
             android:gravity="center"
-            android:text="search"
+            android:text="@string/search"
             android:textColor="@android:color/white"
             android:textSize="@dimen/font_size_large"
             fontPath="fonts/bebasneue.ttf" />

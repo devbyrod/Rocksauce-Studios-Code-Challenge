@@ -7,7 +7,6 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -19,7 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
 import com.rocksaucestudios.rodrigoesquivel_androidcodechallenge.R;
@@ -31,7 +29,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener,
@@ -168,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             return intent;
         }
 
-        intent.putExtra( Intent.EXTRA_TEXT, post.getTitle() + "\n" + post.getAuthor() );
+        intent.putExtra( Intent.EXTRA_TEXT, post.getAuthor() + "\n" + post.getTitle() );
 
         return intent;
     }
@@ -190,12 +187,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         String query = mSearchView.getQuery().toString();
         query = query.trim();
-        query = "".equals(query) ? "funny" : query;
+        query = "".equals(query) ? getString(R.string.default_search_term) : query;
         mSearchView.setQuery(query, false);
 
         try {
             query = URLEncoder.encode(query, "UTF-8");
-//            loadList(query);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

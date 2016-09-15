@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+import com.rocksaucestudios.rodrigoesquivel_androidcodechallenge.R;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class Post implements Serializable {
 
     public static void getPosts(Context context, String query, final FutureCallback<List<Post>> callback) {
 
-        query = "".equals(query) ? "funny" : query;
+        query = "".equals(query) ? context.getString(R.string.default_search_term) : query;
 
         Ion.with(context)
                 .load("GET", String.format(URL_POSTS, query))

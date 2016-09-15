@@ -29,18 +29,20 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share);
 
-        if (Build.VERSION.SDK_INT < 16) { //ye olde method
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        } else { // Jellybean and up, new hotness
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) { //old devices
+
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        } else { // Jellybean and up
+
             View decorView = getWindow().getDecorView();
             // Hide the status bar.
             int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
             decorView.setSystemUiVisibility(uiOptions);
-            // Remember that you should never show the action bar if the
-            // status bar is hidden, so hide that too if necessary.
+
             ActionBar actionBar = getActionBar();
-            if(actionBar != null){
+
+            if(actionBar != null) {
+
                 actionBar.hide();
             }
         }
